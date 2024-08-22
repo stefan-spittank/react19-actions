@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import './App.css'
-import {updateName} from "./backend.ts";
+import {addSubscription} from "./backend.ts";
 
 function App() {
- const [name, setName] = useState("");
+   const [email, setEmail] = useState("");
    const [error, setError] = useState(null);
    const [isPending, setIsPending] = useState(false);
 
    const handleSubmit = async () => {
      setIsPending(true);
-     const error = await updateName(name);
+     const error = await addSubscription(email);
      setIsPending(false);
      if (error) {
        setError(error);
@@ -19,13 +19,17 @@ function App() {
 
    return (
      <div>
-       <input value={name} onChange={(event) => setName(event.target.value)} />
+       <label htmlFor="name">Email:</label>
+       <input name="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
        <button onClick={handleSubmit} disabled={isPending}>
-         Update
+         Newsletter abonnieren
        </button>
        {error && <p>{error}</p>}
      </div>
    );
 }
+
+
+
 
 export default App

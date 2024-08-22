@@ -1,8 +1,8 @@
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export const updateName = async (name: string)=>{
+export const addSubscription = async (email: string)=>{
     await sleep(1000);
-    console.log("updateName", name);
+    console.log("addSubscription", email);
     return null;
 }
