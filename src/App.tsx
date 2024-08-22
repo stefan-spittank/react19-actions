@@ -30,27 +30,27 @@ import { useActionState } from "react";
 // }
 
 function App() {
-      const [error, submitAction, isPending] = useActionState(
-        async (previousState, formData) => {
-          const error = await addSubscription(formData.get("name"));
-          if (error) {
-            return error;
-          }
-          return null;
-        },
-        null,
-      );
+  const [error, submitAction, isPending] = useActionState(
+    async (previousState, formData: FormData) => {
+      const error = await addSubscription(formData.get("name")?.toString()||"");
+      if (error) {
+        return error;
+      }
+      return null;
+    },
+    null,
+  );
 
-      return (
-        <form action={submitAction}>
-          <label htmlFor="name">Email:</label>
-             <input name="email" type="email" />
-             <button type="submit" disabled={isPending}>
-               Newsletter abonnieren
-             </button>
-             {error && <p>{error}</p>}
-        </form>
-      );
+  return (
+    <form action={submitAction}>
+      <label htmlFor="name">Email:</label>
+         <input name="email" type="email" />
+         <button type="submit" disabled={isPending}>
+           Newsletter abonnieren
+         </button>
+         {error && <p>{error}</p>}
+    </form>
+  );
 }
 
 
